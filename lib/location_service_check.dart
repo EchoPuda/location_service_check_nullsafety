@@ -1,11 +1,9 @@
-
 import 'dart:async';
 
 import 'package:flutter/services.dart';
 
 class LocationServiceCheck {
-  static const MethodChannel _channel =
-  MethodChannel('location_service_check');
+  static const MethodChannel _channel = MethodChannel('location_service_check');
 
   /// 获取是否开启了定位服务
   static Future<bool> get checkLocationIsOpen async {
@@ -24,8 +22,7 @@ class LocationServiceCheck {
     double lat = res["latitude"];
     double log = res["longitude"];
 
-    LocationData locationData = LocationData(
-        latitude: lat, longitude: log);
+    LocationData locationData = LocationData(latitude: lat, longitude: log);
     return locationData;
   }
 }

@@ -1,5 +1,5 @@
 name: location_service_check
-description: A new Flutter project.
+description: Function to check if location services are available. Android and iOS are supported.
 version: 1.0.0
 homepage: https://github.com/EchoPuda/location_service_check_nullsafety
 
