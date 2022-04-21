@@ -1,15 +1,26 @@
 # location_service_check
 
-A new Flutter project.
+一个检查定位权限是否开启的服务，支持Android和iOS。
+
+功能比较简单，所以之前一直没有管了。这次更新下nullsafety方便直接使用。
 
 ## Getting Started
+```yaml
+dependencies:
+  location_service_check: ^1.0.0
+```
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+## How to Use
+```dart
+import 'package:location_service_check/location_service_check.dart';
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+void check() {
+    bool isOpen = await LocationServiceCheck.checkLocationIsOpen;
+}
+
+void _openSetting() async {
+  LocationServiceCheck.openLocationSetting();
+}
+
+```
 
