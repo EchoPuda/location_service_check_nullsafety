@@ -1,11 +1,10 @@
 name: location_service_check
 description: Function to check if location services are available. Android and iOS are supported.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/EchoPuda/location_service_check_nullsafety
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=1.10.0"
+  sdk: ">=2.17.5 <3.0.0"
 
 dependencies:
   flutter:
