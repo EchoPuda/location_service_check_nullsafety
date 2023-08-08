@@ -12,6 +12,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
 import java.util.HashMap;
@@ -83,21 +84,24 @@ public class LocationServiceCheckPlugin implements FlutterPlugin, MethodCallHand
 
   /**
    * 返回定位服务开启状态
+   * 因为最低支持 minSdkVersion 16 所以会有检查的步骤，使用旧的APi
    */
   private boolean isLocationEnabled() {
     int locationMode;
     String locationProviders;
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      try {
-        locationMode = Settings.Secure.getInt(contentResolver,Settings.Secure.LOCATION_MODE);
-      } catch (Settings.SettingNotFoundException e) {
-        e.printStackTrace();
-        return false;
-      }
-      return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+      // This is new method provided in API 28
+      LocationManager lm = (LocationManager) aContext.getSystemService(Context.LOCATION_SERVICE);
+      return lm.isLocationEnabled();
     } else {
-      locationProviders = Settings.Secure.getString(contentResolver, Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-      return !TextUtils.isEmpty(locationProviders);
+      // This is Deprecated in API 28
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        locationMode = Settings.Secure.getInt(contentResolver,Settings.Secure.LOCATION_MODE,Settings.Secure.LOCATION_MODE_OFF);
+        return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+      } else {
+        locationProviders = Settings.Secure.getString(contentResolver, Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        return !TextUtils.isEmpty(locationProviders);
+      }
     }
   }
 

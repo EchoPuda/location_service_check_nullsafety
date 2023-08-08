@@ -32,4 +32,10 @@ android {
     defaultConfig {
         minSdkVersion 16
     }
+
+//    gradle.projectsEvaluated {
+//        tasks.withType(JavaCompile) {
+//            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+//        }
+//    }
 }
